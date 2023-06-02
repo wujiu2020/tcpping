@@ -1,4 +1,4 @@
-module github.com/wujiu2020/tcping
+module github.com/wujiu2020/tcpping
 
 go 1.18
 

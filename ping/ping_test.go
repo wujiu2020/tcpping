@@ -8,7 +8,7 @@ import (
 	"testing"
 	"time"
 
-	tcping "github.com/wujiu2020/tcping/ping"
+	tcping "github.com/wujiu2020/tcpping/ping"
 )
 
 type PingHandler func(ctx context.Context) *tcping.Stats

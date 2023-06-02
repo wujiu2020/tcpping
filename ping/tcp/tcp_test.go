@@ -4,8 +4,8 @@ import (
 	"context"
 	"testing"
 
-	tcping "github.com/wujiu2020/tcping/ping"
-	"github.com/wujiu2020/tcping/ping/tcp"
+	tcping "github.com/wujiu2020/tcpping/ping"
+	"github.com/wujiu2020/tcpping/ping/tcp"
 )
 
 func TestPing(t *testing.T) {

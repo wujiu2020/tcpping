@@ -9,7 +9,7 @@ import (
 	"net/http/httptrace"
 	"time"
 
-	"github.com/wujiu2020/tcping/ping"
+	"github.com/wujiu2020/tcpping/ping"
 )
 
 var _ ping.Ping = (*Ping)(nil)

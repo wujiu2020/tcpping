@@ -11,9 +11,9 @@ import (
 	"syscall"
 
 	"github.com/spf13/cobra"
-	"github.com/wujiu2020/tcping/ping"
-	"github.com/wujiu2020/tcping/ping/http"
-	"github.com/wujiu2020/tcping/ping/tcp"
+	"github.com/wujiu2020/tcpping/ping"
+	"github.com/wujiu2020/tcpping/ping/http"
+	"github.com/wujiu2020/tcpping/ping/tcp"
 )
 
 var (
