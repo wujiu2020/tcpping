@@ -213,14 +213,17 @@ Approximate trip times:
 
 func (p *Pinger) Statistics() *Statistics {
 	loss := float64(p.failedTotal) / float64(p.total) * 100
+	avgRtt := p.totalDuration / time.Duration(p.counter)
 	return &Statistics{
 		PacketLoss: loss,
 		Rtts:       p.rtts,
+		AvgRtt:     avgRtt,
 	}
 }
 
 type Statistics struct {
 	PacketLoss float64
+	AvgRtt     time.Duration
 	Rtts       []time.Duration
 }
 
