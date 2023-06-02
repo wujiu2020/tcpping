@@ -188,6 +188,13 @@ func (p *Pinger) Ping() {
 		select {
 		case <-timer.C:
 			stats := p.ping.Ping(ctx)
+			if stats.Duration < p.minDuration {
+				p.minDuration = stats.Duration
+			}
+			if stats.Duration > p.maxDuration {
+				p.maxDuration = stats.Duration
+			}
+			p.totalDuration += stats.Duration
 			p.rtts = append(p.rtts, stats.Duration)
 			if p.total++; p.counter > 0 && p.total > p.counter-1 {
 				stop = true
