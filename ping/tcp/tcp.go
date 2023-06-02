@@ -20,9 +20,7 @@ func New(host string, port int, op *ping.Option, tls bool) *Ping {
 		host:   host,
 		port:   port,
 		option: op,
-		dialer: &net.Dialer{
-			Resolver: op.Resolver,
-		},
+		dialer: op.Dialer,
 	}
 }
 

@@ -69,6 +69,7 @@ func NewProtocol(protocol string) (Protocol, error) {
 type Option struct {
 	Timeout  time.Duration
 	Resolver *net.Resolver
+	Dialer   *net.Dialer
 	Proxy    *url.URL
 	UA       string
 }
