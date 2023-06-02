@@ -151,6 +151,7 @@ type Pinger struct {
 	totalDuration time.Duration
 	total         int
 	failedTotal   int
+	rtts          []time.Duration
 }
 
 func (p *Pinger) Stop() {
@@ -187,7 +188,7 @@ func (p *Pinger) Ping() {
 		select {
 		case <-timer.C:
 			stats := p.ping.Ping(ctx)
-			p.logStats(stats)
+			p.rtts = append(p.rtts, stats.Duration)
 			if p.total++; p.counter > 0 && p.total > p.counter-1 {
 				stop = true
 			}
@@ -208,6 +209,19 @@ Approximate trip times:
 	Minimum = %s, Maximum = %s, Average = %s`
 
 	_, _ = fmt.Fprintf(p.out, tpl, p.url.String(), p.total, p.total-p.failedTotal, p.failedTotal, p.minDuration, p.maxDuration, p.totalDuration/time.Duration(p.total))
+}
+
+func (p *Pinger) Statistics() *Statistics {
+	loss := float64(p.failedTotal) / float64(p.total) * 100
+	return &Statistics{
+		PacketLoss: loss,
+		Rtts:       p.rtts,
+	}
+}
+
+type Statistics struct {
+	PacketLoss float64
+	Rtts       []time.Duration
 }
 
 func (p *Pinger) formatError(err error) string {
