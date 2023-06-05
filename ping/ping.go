@@ -195,6 +195,11 @@ func (p *Pinger) Ping() {
 			if stats.Duration > p.maxDuration {
 				p.maxDuration = stats.Duration
 			}
+
+			if stats.Error != nil {
+				p.failedTotal++
+				stats.Duration = 0
+			}
 			p.totalDuration += stats.Duration
 			p.rtts = append(p.rtts, stats.Duration)
 			if p.total++; p.counter > 0 && p.total > p.counter-1 {
